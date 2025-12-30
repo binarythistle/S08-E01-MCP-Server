@@ -13,4 +13,18 @@ public class PlaneTools
         var statuses = await planeApiService.GetProjectStatusesAsync();
         return JsonSerializer.Serialize(statuses);
     }
+
+    [McpServerTool, Description("Get all work items. This returns all work items irrespective of status")]
+    public static async Task<string> GetAllWorkItems(PlaneApiService planeApiService)
+    {
+        var workItems = await planeApiService.GetAllWorkItemsAsync();
+        return JsonSerializer.Serialize(workItems);
+    }
+
+    [McpServerTool, Description("This tool allows you to create a simple work item. It does require a status Id which can be derived from the GetAllWorkItemStatuses Tool. Default should be Backlog if not supplied.")]
+    public static async Task<string> CreateWorkItem(PlaneApiService planeApiService, [Description("The main title for the work item")] string name, [Description("The high level description for the work item")] string description, [Description("The status ID of the work item , derived from the GetAllWorkItemStatues tool")] string statusId)
+    {
+        var workItem = await planeApiService.CreateWorkItemAsync(name, description, statusId);
+        return JsonSerializer.Serialize(workItem);
+    }
 }
