@@ -6,6 +6,9 @@
 # dotenv files
 .env
 
+# private context
+.context.md
+
 # User-specific files
 *.rsuser
 *.suo
